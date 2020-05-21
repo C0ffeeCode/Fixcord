@@ -11,38 +11,30 @@ namespace Fixcord.App
 {
 	public static class Configuration
     {
-        public static readonly string file = "config.json";
+        private static readonly string Path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Fixcord\\";
+        public static readonly string ConfigFile = Path + "config.json";
         public static Config Config = new Config();
 
         public static async void Save()
         {
-            var b = JsonSerializer.Serialize(Config);
-
-            using (StreamWriter outputFile = new StreamWriter(file))
-            {
-                await outputFile.WriteAsync(b);
-            }
+            Directory.CreateDirectory(Path);
+            using (StreamWriter outputFile = new StreamWriter(ConfigFile))
+                await outputFile.WriteAsync(JsonSerializer.Serialize(Config));
         }
 
-        /// <summary>
-        /// Loads the config to Config
-        /// </summary>
-        /// <returns>Returns true on error (e.g. the file was not found)</returns>
-        public static async Task<bool> Load()
+        public static async Task Load()
         {
             try
             {
-                StreamReader sr = new StreamReader("config.json");
+                StreamReader sr = new StreamReader(ConfigFile);
                 string file = await sr.ReadToEndAsync();
                 sr.Close();
 
                 Config = JsonSerializer.Deserialize<Config>(file)!;
-                return false;
             }
             catch (FileNotFoundException ex)
             {
                 Debug.WriteLine(ex.Message);
-                return true;
             }
         }
     }

@@ -10,6 +10,7 @@ namespace Fixcord.App
 	{
 		public MainWindow()
 		{
+			Configuration.Load().ConfigureAwait(true);
 			var x = new ClientBot();
 			x.Initialize(Configuration.Config.Token!);
 			InitializeComponent();
