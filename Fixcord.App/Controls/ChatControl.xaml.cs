@@ -1,4 +1,4 @@
-﻿using Discord;
+using Discord;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -16,17 +16,23 @@ namespace Fixcord.App
 		public ChatControl()
 		{
 			InitializeComponent();
-			var a = (SocketTextChannel)ClientBot.selectedTextChannel;
-			ClientBot.client.MessageReceived += (SocketMessage arg) => RefreshAsync();
+			var a = ClientBot.selectedTextChannel;
+			ClientBot.client!.MessageReceived += (SocketMessage arg) => RefreshAsync();
+			ClientBot.client.MessageReceived += Client_MessageReceived;
+		}
+
+		private Task Client_MessageReceived(SocketMessage arg)
+		{
+			if (arg.Channel == ClientBot.selectedTextChannel)
+				RefreshAsync();
+			return Task.CompletedTask;
 		}
 
 		private async Task RefreshAsync()
 		{
-			SocketTextChannel channel = ClientBot.selectedTextChannel;
+			SocketTextChannel channel = ClientBot.selectedTextChannel!;
 			if (channel == null)
-			{
 				return;
-			}
 
 			try
 			{
@@ -38,28 +44,17 @@ namespace Fixcord.App
 				{
 					c.Add($"{i.Author}: {i.Content}");
 				}
-
-				messages.ItemsSource = c;
+				Dispatcher.Invoke(() =>
+				messages.ItemsSource = c);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine("Refreshing chat failed.");
+				Debug.WriteLine("Refreshing chat failed. " + e);
 			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 			=> RefreshAsync().ConfigureAwait(false);
 
-		private void MessageInput_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Return)
-			{
-				var b = (IMessageChannel)ClientBot.selectedTextChannel;
-				b.SendMessageAsync(messageInput.Text);
-				messageInput.Text = null;
-
-				RefreshAsync().ConfigureAwait(false);
-			}
-		}
 	}
 }

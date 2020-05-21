@@ -9,7 +9,7 @@
   <Identity
     Name="c2c01039-a09e-4d0c-95c4-f5e4bfb17d35"
     Publisher="CN=CoffeeCode"
-    Version="1.0.0.0" />
+    Version="1.0.3.0" />
 
   <Properties>
     <DisplayName>Fixcord</DisplayName>

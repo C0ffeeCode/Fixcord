@@ -1,4 +1,4 @@
-﻿using Discord.WebSocket;
+using Discord.WebSocket;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -20,7 +20,8 @@ namespace Fixcord.App
 		{
 			if (ClientBot.selectedGuild != null)
 			{
-				ChannelList.ItemsSource = ClientBot.selectedGuild.Channels.AsEnumerable();
+				ChannelList.ItemsSource = ClientBot.selectedGuild.Channels.AsEnumerable()
+					.Where(c => c.GetType().Name.ToString() == "SocketTextChannel");
 			};
 		}
 

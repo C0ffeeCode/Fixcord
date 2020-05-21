@@ -1,5 +1,6 @@
-﻿using Discord;
+using Discord;
 using Discord.WebSocket;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace Fixcord.App
 		{
 			client = new DiscordSocketClient(new DiscordSocketConfig
 			{
-				LogLevel = LogSeverity.Debug
+				LogLevel = LogSeverity.Info
 			});
 			try
 			{
@@ -24,10 +25,11 @@ namespace Fixcord.App
 			}
 			catch
 			{
+				Debug.WriteLine("Bot token got denied");
 			}
 			finally
 			{
-				await client.StartAsync().ConfigureAwait(true);
+				await client.StartAsync();
 			}
 
 			client.Log += Log;
