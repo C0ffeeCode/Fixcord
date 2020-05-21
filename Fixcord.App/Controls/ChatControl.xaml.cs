@@ -16,21 +16,22 @@ namespace Fixcord.App
 		public ChatControl()
 		{
 			InitializeComponent();
-			var a = ClientBot.selectedTextChannel;
+			var a = ClientBot.SelectedTextChannel;
 			ClientBot.client!.MessageReceived += (SocketMessage arg) => RefreshAsync();
 			ClientBot.client.MessageReceived += Client_MessageReceived;
+			ClientBot.SelectedTextChannelChanged += () => RefreshAsync().ConfigureAwait(false);
 		}
 
 		private Task Client_MessageReceived(SocketMessage arg)
 		{
-			if (arg.Channel == ClientBot.selectedTextChannel)
-				RefreshAsync();
+			if (arg.Channel == ClientBot.SelectedTextChannel)
+				RefreshAsync().ConfigureAwait(false);
 			return Task.CompletedTask;
 		}
 
 		private async Task RefreshAsync()
 		{
-			SocketTextChannel channel = ClientBot.selectedTextChannel!;
+			SocketTextChannel channel = ClientBot.SelectedTextChannel!;
 			if (channel == null)
 				return;
 

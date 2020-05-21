@@ -25,10 +25,10 @@ namespace Fixcord.App
 
 		private void MessageInput_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (ClientBot.selectedTextChannel == null) return;
+			if (ClientBot.SelectedTextChannel == null) return;
 			if (e.Key == Key.Return)
 			{
-				var b = (IMessageChannel)ClientBot.selectedTextChannel!;
+				var b = (IMessageChannel)ClientBot.SelectedTextChannel!;
 				b.SendMessageAsync(messageInput.Text);
 				messageInput.Text = null;
 			}

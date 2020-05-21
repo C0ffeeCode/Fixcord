@@ -14,13 +14,23 @@ namespace Fixcord.App
 		public ChannelSelector()
 		{
 			InitializeComponent();
+			ClientBot.SelectedGuildChanged += ClientBot_SelectedGuildChanged;
+		}
+
+		private void ClientBot_SelectedGuildChanged()
+		{
+			if (ClientBot.SelectedGuild != null)
+			{
+				ChannelList.ItemsSource = ClientBot.SelectedGuild.Channels.AsEnumerable()
+					.Where(c => c.GetType().Name.ToString() == "SocketTextChannel");
+			};
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (ClientBot.selectedGuild != null)
+			if (ClientBot.SelectedGuild != null)
 			{
-				ChannelList.ItemsSource = ClientBot.selectedGuild.Channels.AsEnumerable()
+				ChannelList.ItemsSource = ClientBot.SelectedGuild.Channels.AsEnumerable()
 					.Where(c => c.GetType().Name.ToString() == "SocketTextChannel");
 			};
 		}
@@ -36,13 +46,13 @@ namespace Fixcord.App
 			switch (channelTypeName)
 			{
 				case ("SocketVoiceChannel"):
-					ClientBot.selectedVoiceChannel = (SocketVoiceChannel)ChannelList.SelectedItem;
+					ClientBot.SelectedVoiceChannel = (SocketVoiceChannel)ChannelList.SelectedItem;
 					break;
 				case ("SocketTextChannel"):
-					ClientBot.selectedTextChannel = (SocketTextChannel)ChannelList.SelectedItem;
+					ClientBot.SelectedTextChannel = (SocketTextChannel)ChannelList.SelectedItem;
 					break;
 				default:
-					Debug.WriteLine($"Unknown channel type: {channelTypeName}");
+					Debug.WriteLine($"Unknown channel type selected: {channelTypeName}");
 					break;
 			}
 		}

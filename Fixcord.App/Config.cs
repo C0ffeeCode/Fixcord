@@ -15,7 +15,7 @@ namespace Fixcord.App
         public static readonly string ConfigFile = Path + "config.json";
         public static Config Config = new Config();
 
-        public static async void Save()
+		public static async void Save()
         {
             Directory.CreateDirectory(Path);
             using (StreamWriter outputFile = new StreamWriter(ConfigFile))
