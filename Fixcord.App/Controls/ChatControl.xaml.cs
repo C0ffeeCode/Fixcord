@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-namespace Fixcord.App
+namespace Fixcord.App.Controls
 {
 	public partial class ChatControl : UserControl
 	{
@@ -18,32 +20,25 @@ namespace Fixcord.App
 			InitializeComponent();
 			var a = ClientBot.SelectedTextChannel;
 			ClientBot.client!.MessageReceived += (SocketMessage arg) => RefreshAsync();
-			ClientBot.client.MessageReceived += Client_MessageReceived;
 			ClientBot.SelectedTextChannelChanged += () => RefreshAsync().ConfigureAwait(false);
-		}
-
-		private Task Client_MessageReceived(SocketMessage arg)
-		{
-			if (arg.Channel == ClientBot.SelectedTextChannel)
-				RefreshAsync().ConfigureAwait(false);
-			return Task.CompletedTask;
 		}
 
 		private async Task RefreshAsync()
 		{
 			SocketTextChannel channel = ClientBot.SelectedTextChannel!;
-			if (channel == null)
-				return;
+			if (channel == null) return;
 
 			try
 			{
-				var pages = await channel.GetMessagesAsync().ToListAsync();
-				var page1 = pages[1].AsEnumerable().OrderBy(s => s.Timestamp);
+				var a = await channel.GetMessagesAsync().ToListAsync();
+				var b = a[1].AsEnumerable().OrderBy(s => s.Timestamp);
 
-				var c = new List<string>();
-				foreach (var i in page1)
+				var c = new List<ChatItem>();
+				foreach (var i in b)
 				{
-					c.Add($"{i.Author}: {i.Content}");
+					var d = new ChatItem();
+					d.Message = i;
+					c.Add(d);
 				}
 				Dispatcher.Invoke(() =>
 				messages.ItemsSource = c);
@@ -56,6 +51,5 @@ namespace Fixcord.App
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 			=> RefreshAsync().ConfigureAwait(false);
-
 	}
 }

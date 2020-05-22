@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Fixcord.App
+namespace Fixcord.App.Controls
 {
 	public partial class GuildSelector : UserControl
 	{

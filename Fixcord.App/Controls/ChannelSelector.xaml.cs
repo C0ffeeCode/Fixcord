@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Fixcord.App
+namespace Fixcord.App.Controls
 {
 	/// <summary>
 	/// Interaction logic for ChannelSelector.xaml
