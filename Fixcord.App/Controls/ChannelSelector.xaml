@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Fixcord.App"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-	<StackPanel>
+	<Grid>
 		<ListBox x:Name="ChannelList" SelectionChanged="ChannelList_SelectionChanged" SelectionMode="Single" />
-	</StackPanel>
+	</Grid>
 </UserControl>

@@ -37,11 +37,11 @@ namespace Fixcord.App
 
 			try
 			{
-				var a = await channel.GetMessagesAsync().ToListAsync();
-				var b = a[1].AsEnumerable().OrderBy(s => s.Timestamp);
+				var pages = await channel.GetMessagesAsync().ToListAsync();
+				var page1 = pages[1].AsEnumerable().OrderBy(s => s.Timestamp);
 
 				var c = new List<string>();
-				foreach (var i in b)
+				foreach (var i in page1)
 				{
 					c.Add($"{i.Author}: {i.Content}");
 				}

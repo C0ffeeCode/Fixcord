@@ -22,7 +22,7 @@
 		<local:GuildSelector Grid.Column="0" Grid.Row="0" />
 		<local:ChannelSelector Grid.Column="2" Grid.RowSpan="2" />
 		<local:ChatControl Grid.Column="4" Grid.Row="0" />
-
+		
 		<TextBox x:Name="tokenInput" Grid.Column="0" Grid.Row="1" KeyDown="TokenInput_KeyDown" />
 		<TextBox x:Name="messageInput" Grid.Column="4" Grid.Row="1" KeyDown="MessageInput_KeyDown" />
 	</Grid>
