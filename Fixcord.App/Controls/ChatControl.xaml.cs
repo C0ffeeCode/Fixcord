@@ -7,9 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Fixcord.App.Controls
 {
@@ -38,6 +35,7 @@ namespace Fixcord.App.Controls
 				{
 					var d = new ChatItem();
 					d.Message = i;
+					//d.Width = this.Width;
 					c.Add(d);
 				}
 				Dispatcher.Invoke(() =>

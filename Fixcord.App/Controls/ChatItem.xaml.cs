@@ -34,7 +34,8 @@ namespace Fixcord.App.Controls
 			set
 			{
 				a = value;
-				authorName.Text = a.Author.Username;
+				authorName.Content = a.Author.Username;
+
 				//authorProfilePicture.Source =  a.Author.AvatarId
 				messageText.Text = a.Content;
 			}
