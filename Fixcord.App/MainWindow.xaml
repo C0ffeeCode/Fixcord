@@ -5,7 +5,8 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Fixcord.App.Controls"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="450" Width="800">
+		Title="Fixcord" Height="450" Width="800">
+	
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="200" />
@@ -20,7 +21,7 @@
 		</Grid.RowDefinitions>
 
 		<local:GuildSelector Grid.Column="0" Grid.Row="0" />
-		<local:ChannelSelector Grid.Column="2" Grid.RowSpan="2" />
+		<local:ChannelSelector Grid.Column="2" Grid.Row="0" />
 		<local:ChatControl Grid.Column="4" Grid.Row="0" />
 		
 		<TextBox x:Name="tokenInput" Grid.Column="0" Grid.Row="1" KeyDown="TokenInput_KeyDown" />

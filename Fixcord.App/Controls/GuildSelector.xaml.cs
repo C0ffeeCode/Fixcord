@@ -1,12 +1,8 @@
 using Discord.WebSocket;
-using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
 
 namespace Fixcord.App.Controls
 {

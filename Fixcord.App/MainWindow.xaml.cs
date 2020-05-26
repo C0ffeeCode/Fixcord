@@ -1,5 +1,4 @@
 using Discord;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,7 +9,7 @@ namespace Fixcord.App
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		ClientBot x = new ClientBot();
+		readonly ClientBot x = new ClientBot();
 
 		public MainWindow()
 		{
@@ -20,7 +19,7 @@ namespace Fixcord.App
 
 		private void TokenInput_KeyDown(object sender, KeyEventArgs e)
 		{
-			if( e.Key == Key.Enter)
+			if (e.Key == Key.Enter)
 			{
 				Configuration.Config.Token = tokenInput.Text;
 				Configuration.Save();
@@ -31,7 +30,11 @@ namespace Fixcord.App
 
 		private void MessageInput_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (ClientBot.SelectedTextChannel == null) return;
+			if (ClientBot.SelectedTextChannel == null)
+			{
+				return;
+			}
+
 			if (e.Key == Key.Return)
 			{
 				((IMessageChannel)ClientBot.SelectedTextChannel!)

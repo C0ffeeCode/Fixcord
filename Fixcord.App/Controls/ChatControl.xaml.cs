@@ -2,7 +2,6 @@ using Discord;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +17,7 @@ namespace Fixcord.App.Controls
 		{
 			InitializeComponent();
 			//messagelisttest.ItemsSource = listabc;
-			ClientBot.client!.MessageReceived += (SocketMessage arg) => 
+			ClientBot.client!.MessageReceived += (SocketMessage arg) =>
 			{
 				ClientBot.InvokeTextChannelChange();
 				return Task.CompletedTask;
@@ -26,14 +25,18 @@ namespace Fixcord.App.Controls
 			ClientBot.SelectedTextChannelChanged += () => RefreshAsync();
 		}
 
-			//return ClientBot.SelectedTextChannel == null ? (IEnumerable<IMessage>)new List<IMessage>() : ClientBot.SelectedTextChannel!.GetCachedMessages().AsEnumerable();
+		//return ClientBot.SelectedTextChannel == null ? (IEnumerable<IMessage>)new List<IMessage>() : ClientBot.SelectedTextChannel!.GetCachedMessages().AsEnumerable();
 
 		private void RefreshAsync()
 		{
 			// Im sorrry, 🍝
-			Dispatcher.Invoke(new Action(() => { 
+			Dispatcher.Invoke(new Action(() =>
+			{
 				SocketTextChannel channel = ClientBot.SelectedTextChannel!;
-				if (channel == null) return ;
+				if (channel == null)
+				{
+					return;
+				}
 
 				List<IMessage> listabc = new List<IMessage>();
 				try
@@ -61,7 +64,7 @@ namespace Fixcord.App.Controls
 				{
 					Debug.WriteLine("Refreshing chat failed. " + e);
 				}
-				return ;
+				return;
 			}), DispatcherPriority.ContextIdle);
 		}
 
