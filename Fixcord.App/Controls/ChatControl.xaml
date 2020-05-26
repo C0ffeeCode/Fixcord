@@ -7,8 +7,16 @@
 			 mc:Ignorable="d" 
 			 d:DesignHeight="450" d:DesignWidth="800">
 	<Grid>
-		<ListBox x:Name="messages" />
-		<!--TESTING-->
-		<!--<local:ChatItem x:Name="chatItem" />-->
+		<!--<ItemsControl x:Name="messages" ItemsSource="{Binding Source=listabc, Mode=OneWay}" />-->
+		
+		<ListBox x:Name="messagelisttest">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding Content}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 	</Grid>
 </UserControl>

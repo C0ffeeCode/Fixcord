@@ -2,11 +2,13 @@ using Discord;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Fixcord.App.Controls
 {
@@ -15,39 +17,54 @@ namespace Fixcord.App.Controls
 		public ChatControl()
 		{
 			InitializeComponent();
-			var a = ClientBot.SelectedTextChannel;
-			ClientBot.client!.MessageReceived += (SocketMessage arg) => RefreshAsync();
-			ClientBot.SelectedTextChannelChanged += () => RefreshAsync().ConfigureAwait(false);
+			//messagelisttest.ItemsSource = listabc;
+			ClientBot.client!.MessageReceived += (SocketMessage arg) => 
+			{
+				ClientBot.InvokeTextChannelChange();
+				return Task.CompletedTask;
+			};
+			ClientBot.SelectedTextChannelChanged += () => RefreshAsync();
 		}
 
-		private async Task RefreshAsync()
-		{
-			SocketTextChannel channel = ClientBot.SelectedTextChannel!;
-			if (channel == null) return;
+			//return ClientBot.SelectedTextChannel == null ? (IEnumerable<IMessage>)new List<IMessage>() : ClientBot.SelectedTextChannel!.GetCachedMessages().AsEnumerable();
 
+		private void RefreshAsync()
+		{
+			Dispatcher.Invoke(new Action(() => { 
+			SocketTextChannel channel = ClientBot.SelectedTextChannel!;
+			if (channel == null) return ;
+
+			List<IMessage> listabc = new List<IMessage>();
 			try
 			{
-				var a = await channel.GetMessagesAsync().ToListAsync();
+				var a = channel.GetMessagesAsync().ToListAsync().Result;
 				var b = a[1].AsEnumerable().OrderBy(s => s.Timestamp);
 
-				var c = new List<ChatItem>();
-				foreach (var i in b)
+				var x = channel.GetMessagesAsync().ToListAsync().Result;
+				//listabc = channel.GetMessagesAsync().ToEnumerable();
+
+				foreach (var i in x[1])
 				{
-					var d = new ChatItem();
-					d.Message = i;
-					//d.Width = this.Width;
-					c.Add(d);
+					listabc.Add(i);
+					//var d = new ChatItem();
+					//d.Message = i;
+					////d.Width = this.Width;
+					//listabc.Add(d);
 				}
-				Dispatcher.Invoke(() =>
-				messages.ItemsSource = c);
+				//Dispatcher.Invoke(
+				//	DispatcherPriority.DataBind,
+				//	new Action(() =>
+				messagelisttest.ItemsSource = listabc;
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine("Refreshing chat failed. " + e);
 			}
+			return ;
+			}), DispatcherPriority.ContextIdle);
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
-			=> RefreshAsync().ConfigureAwait(false);
+			=> RefreshAsync();
 	}
 }

@@ -45,6 +45,11 @@ namespace Fixcord.App
 			}
 		}
 
+		public static void InvokeTextChannelChange()
+		{
+			SelectedTextChannelChanged?.Invoke();
+		}
+
 		public async void Initialize(string token)
 		{
 			client = new DiscordSocketClient(new DiscordSocketConfig
