@@ -13,6 +13,7 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>
+						<Label Content="{Binding Author}" Foreground="DarkRed" />
 						<TextBlock Text="{Binding Content}" />
 					</StackPanel>
 				</DataTemplate>
