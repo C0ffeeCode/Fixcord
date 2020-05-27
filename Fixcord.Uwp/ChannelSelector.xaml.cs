@@ -1,19 +1,30 @@
-using Discord.WebSocket;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using Discord.WebSocket;
 
-namespace Fixcord.App.Controls
+// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace Fixcord.Uwp
 {
-	/// <summary>
-	/// Interaction logic for ChannelSelector.xaml
-	/// </summary>
-	public partial class ChannelSelector : UserControl
+	public sealed partial class ChannelSelector : UserControl
 	{
 		public ChannelSelector()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 			ClientBot.SelectedGuildChanged += ClientBot_SelectedGuildChanged;
 		}
 
@@ -23,7 +34,7 @@ namespace Fixcord.App.Controls
 			{
 				ChannelList.ItemsSource = ClientBot.SelectedGuild.Channels.AsEnumerable()
 					.Where(c => c.GetType().Name.ToString() == "SocketTextChannel");
-			};
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

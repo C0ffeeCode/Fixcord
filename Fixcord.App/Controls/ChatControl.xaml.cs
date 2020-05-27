@@ -7,54 +7,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using System.Windows.Threading;
 
-namespace Fixcord.App
+namespace Fixcord.App.Controls
 {
 	public partial class ChatControl : UserControl
 	{
 		public ChatControl()
 		{
 			InitializeComponent();
-			var a = ClientBot.selectedTextChannel;
-			ClientBot.client!.MessageReceived += (SocketMessage arg) => RefreshAsync();
-			ClientBot.client.MessageReceived += Client_MessageReceived;
+			ClientBot.client!.MessageReceived += (SocketMessage m) => Refresh();
+			ClientBot.SelectedTextChannelChanged += () => Refresh();
 		}
 
-		private Task Client_MessageReceived(SocketMessage arg)
-		{
-			if (arg.Channel == ClientBot.selectedTextChannel)
-				RefreshAsync();
+		private Task Refresh()
+		{ // Im sorrry, 🍝
+			Dispatcher.Invoke(new Action(() =>
+					messagelisttest.ItemsSource =
+						(ClientBot.SelectedTextChannel!.GetMessagesAsync()
+							.ToListAsync().AsTask().Result)[1]
+							.AsEnumerable().OrderBy(s => s.Timestamp)
+			), DispatcherPriority.ContextIdle);
 			return Task.CompletedTask;
 		}
 
-		private async Task RefreshAsync()
-		{
-			SocketTextChannel channel = ClientBot.selectedTextChannel!;
-			if (channel == null)
-				return;
-
-			try
-			{
-				var a = await channel.GetMessagesAsync().ToListAsync();
-				var b = a[1].AsEnumerable().OrderBy(s => s.Timestamp);
-
-				var c = new List<string>();
-				foreach (var i in b)
-				{
-					c.Add($"{i.Author}: {i.Content}");
-				}
-				Dispatcher.Invoke(() =>
-				messages.ItemsSource = c);
-			}
-			catch (Exception e)
-			{
-				Debug.WriteLine("Refreshing chat failed. " + e);
-			}
-		}
-
 		private void Button_Click(object sender, RoutedEventArgs e)
-			=> RefreshAsync().ConfigureAwait(false);
-
+			=> Refresh();
 	}
 }

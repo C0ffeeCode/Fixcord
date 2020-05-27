@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
 using System.Windows;
 
 namespace Fixcord.App

@@ -4,23 +4,23 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Fixcord.App
+namespace Fixcord.Uwp
 {
 	public delegate void MyDel();
 
 	public class ClientBot
 	{
-		public static event MyDel? SelectedGuildChanged;
-		public static event MyDel? SelectedTextChannelChanged;
-		public static event MyDel? SelectedVoiceChannelChanged;
+		public static event MyDel SelectedGuildChanged;
+		public static event MyDel SelectedTextChannelChanged;
+		public static event MyDel SelectedVoiceChannelChanged;
 
-		public static DiscordSocketClient? client;
+		public static DiscordSocketClient client;
 
-		static SocketGuild? selectedGuild;
-		static SocketTextChannel? selectedTextChannel;
-		static SocketVoiceChannel? selectedVoiceChannel;
+		static SocketGuild selectedGuild;
+		static SocketTextChannel selectedTextChannel;
+		static SocketVoiceChannel selectedVoiceChannel;
 
-		public static SocketGuild? SelectedGuild
+		public static SocketGuild SelectedGuild
 		{
 			get => selectedGuild; set
 			{
@@ -28,15 +28,16 @@ namespace Fixcord.App
 				SelectedGuildChanged?.Invoke();
 			}
 		}
-		public static SocketTextChannel? SelectedTextChannel
+		public static SocketTextChannel SelectedTextChannel
 		{
-			get => selectedTextChannel; set
+			get => selectedTextChannel; 
+			set
 			{
 				selectedTextChannel = value;
 				SelectedTextChannelChanged?.Invoke();
 			}
 		}
-		public static SocketVoiceChannel? SelectedVoiceChannel
+		public static SocketVoiceChannel SelectedVoiceChannel
 		{
 			get => selectedVoiceChannel; set
 			{
@@ -45,12 +46,13 @@ namespace Fixcord.App
 			}
 		}
 
-		public static void InvokeTextChannelChange()
+		public static Task InvokeTextChannelChange()
 		{
 			SelectedTextChannelChanged?.Invoke();
+			return Task.CompletedTask;
 		}
 
-		public async void Initialize(string token)
+		public async void Initialize()
 		{
 			client = new DiscordSocketClient(new DiscordSocketConfig
 			{
@@ -58,9 +60,10 @@ namespace Fixcord.App
 			});
 			try
 			{
+				var token = Configuration.Token;
 				await client.LoginAsync(TokenType.Bot, token, true);
 			}
-			catch
+			catch /*(Exeption e)*/
 			{
 				Debug.WriteLine("Bot token got denied");
 			}

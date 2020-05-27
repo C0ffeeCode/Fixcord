@@ -6,15 +6,24 @@
 		<UseWPF>true</UseWPF>
 		<Nullable>enable</Nullable>
 		<Platforms>AnyCPU;x64;x86</Platforms>
+		<AssemblyName>Fixcord</AssemblyName>
+		<Authors>C0ffeeCode</Authors>
+		<Product>Fixcord</Product>
+		<PackageProjectUrl>https://github.com/C0ffeeCode/Fixcord</PackageProjectUrl>
+		<StartupObject>Fixcord.App.App</StartupObject>
+		<RepositoryUrl>https://github.com/C0ffeeCode/Fixcord</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Discord.Net" Version="2.2.0" />
 		<PackageReference Include="Discord.Net.Analyzers" Version="2.2.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.4" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
-		<PackageReference Include="NAudio" Version="1.10.0" />
 	</ItemGroup>
 
 </Project>
