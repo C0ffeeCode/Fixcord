@@ -127,7 +127,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChannelSelector.xaml.cs">
+    <Compile Include="Controls\ChannelSelector.xaml.cs">
       <DependentUpon>ChannelSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatControl.xaml.cs">
@@ -135,7 +135,10 @@
     </Compile>
     <Compile Include="ClientBot.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="GuildSelector.xaml.cs">
+    <Compile Include="Controls\ChatControl.xaml.cs">
+      <DependentUpon>ChatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GuildSelector.xaml.cs">
       <DependentUpon>GuildSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
@@ -163,7 +166,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ChannelSelector.xaml">
+    <Page Include="Controls\ChannelSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +174,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GuildSelector.xaml">
+    <Page Include="Controls\ChatControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GuildSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
