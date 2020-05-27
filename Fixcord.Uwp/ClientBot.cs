@@ -1,6 +1,5 @@
 using Discord;
 using Discord.WebSocket;
-using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -30,7 +29,7 @@ namespace Fixcord.Uwp
 		}
 		public static SocketTextChannel SelectedTextChannel
 		{
-			get => selectedTextChannel; 
+			get => selectedTextChannel;
 			set
 			{
 				selectedTextChannel = value;
