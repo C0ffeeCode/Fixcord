@@ -20,6 +20,7 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 
 namespace Fixcord.Uwp
 {
@@ -36,7 +37,9 @@ namespace Fixcord.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-        }
+			AppCenter.Start("0d18b1b7-221b-4893-b882-a0fb6e6959d5",
+				   typeof(Analytics), typeof(Crashes));
+		}
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
