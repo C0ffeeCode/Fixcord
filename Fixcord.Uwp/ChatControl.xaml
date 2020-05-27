@@ -12,7 +12,7 @@
 	<Grid>
 		<!--<ItemsControl x:Name="messages" ItemsSource="{Binding Source=listabc, Mode=OneWay}" />-->
 
-		<ListBox x:Name="messagelisttest">
+		<ListBox x:Name="messagelisttest" x:DefaultBindMode="OneTime">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<StackPanel>

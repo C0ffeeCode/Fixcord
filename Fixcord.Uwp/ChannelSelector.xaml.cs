@@ -34,7 +34,7 @@ namespace Fixcord.Uwp
 			{
 				ChannelList.ItemsSource = ClientBot.SelectedGuild.Channels.AsEnumerable()
 					.Where(c => c.GetType().Name.ToString() == "SocketTextChannel");
-			};
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

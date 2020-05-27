@@ -29,13 +29,8 @@ namespace Fixcord.Uwp
 
 		public MainPage()
 		{
-			Init();
-			InitializeComponent();
-		}
-
-		private void Init()
-		{
 			x.Initialize();
+			InitializeComponent();
 		}
 
 		private void TokenInput_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -49,17 +44,15 @@ namespace Fixcord.Uwp
 		}
 
 		private void MessageInput_KeyDown(object sender, KeyRoutedEventArgs e)
-		{
+{
 			if (ClientBot.SelectedTextChannel == null)
-			{
 				return;
-			}
 
 			if (e.Key == VirtualKey.Enter)
 			{
 				((IMessageChannel)ClientBot.SelectedTextChannel)
 					.SendMessageAsync(messageInput.Text);
-				messageInput.Text = null;
+				messageInput.Text = "";
 			}
 		}
 	}

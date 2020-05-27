@@ -46,9 +46,10 @@ namespace Fixcord.Uwp
 			}
 		}
 
-		public static void InvokeTextChannelChange()
+		public static Task InvokeTextChannelChange()
 		{
 			SelectedTextChannelChanged?.Invoke();
+			return Task.CompletedTask;
 		}
 
 		public async void Initialize()
@@ -62,7 +63,7 @@ namespace Fixcord.Uwp
 				var token = Configuration.Token;
 				await client.LoginAsync(TokenType.Bot, token, true);
 			}
-			catch
+			catch /*(Exeption e)*/
 			{
 				Debug.WriteLine("Bot token got denied");
 			}

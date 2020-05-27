@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Discord.WebSocket;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -24,37 +25,23 @@ namespace Fixcord.Uwp
 		public ChatControl()
 		{
 			this.InitializeComponent();
-			ClientBot.client.MessageReceived += (SocketMessage m) => Refresh();
+			ClientBot.client.MessageReceived += Refresh;
 			ClientBot.SelectedTextChannelChanged += () => Refresh();
 		}
 
-		private Task Refresh()
-		{ // Im sorrry, 🍝
-		  //Dispatcher.Invoke(new Action(() =>
-		  //		messagelisttest.ItemsSource =
-		  //			(ClientBot.SelectedTextChannel!.GetMessagesAsync()
-		  //				.ToListAsync().AsTask().Result)[1]
-		  //				.AsEnumerable().OrderBy(s => s.Timestamp)
-		  //), DispatcherPriority.ContextIdle);
+		private async Task Refresh(SocketMessage m = null)
+		{
 			if (ClientBot.SelectedTextChannel == null)
-				return Task.CompletedTask;
-			try
-			{
-				var messages = ClientBot.SelectedTextChannel.GetMessagesAsync();
-				messagelisttest.ItemsSource =
-					(messages
-						.ToListAsync().AsTask().Result)[1]
-						.AsEnumerable().OrderBy(s => s.Timestamp);
-				return Task.CompletedTask;
-			}
-			catch (Exception e)
-			{
+				return /*Task.CompletedTask*/;
 
-				throw e;
-			}
+			await Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
+			messagelisttest.ItemsSource = 
+				(ClientBot.SelectedTextChannel.GetMessagesAsync()
+					.ToListAsync().AsTask().Result)[1]
+					.AsEnumerable().OrderBy(s => s.Timestamp)
+			);
+
+			//return Task.CompletedTask;
 		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-			=> Refresh();
 	}
 }
