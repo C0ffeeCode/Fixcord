@@ -9,18 +9,30 @@
 	d:DesignHeight="300"
 	d:DesignWidth="400">
 
-    <Grid>
-        <!--<ItemsControl x:Name="messages" ItemsSource="{Binding Source=listabc, Mode=OneWay}" />-->
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
 
-        <ListView x:Name="messagelisttest" x:DefaultBindMode="OneTime" Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumHighBrush}" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Author}" Foreground="DarkRed" />
-                        <TextBlock Text="{Binding Content}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+		<ListView x:Name="messagelist" x:DefaultBindMode="OneTime"
+				  ItemContainerTransitions="{x:Null}"
+				  Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumHighBrush}">
+			<ListView.ItemsPanel>
+				<ItemsPanelTemplate>
+					<ItemsStackPanel ItemsUpdatingScrollMode="KeepItemsInView" />
+				</ItemsPanelTemplate>
+			</ListView.ItemsPanel>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding Author}" Foreground="DarkRed" />
+						<TextBlock Text="{Binding Content}" />
+					</StackPanel>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		
+		<TextBox x:Name="messageInput" Grid.Column="4" Grid.Row="1" KeyDown="MessageInput_KeyDown" TextWrapping="Wrap" />
+	</Grid>
 </UserControl>
