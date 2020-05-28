@@ -5,8 +5,14 @@
 	xmlns:local="using:Fixcord.Uwp.Controls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d"
-	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	mc:Ignorable="d">
+	<Page.Background>
+		<AcrylicBrush FallbackColor="{ThemeResource SystemAltMediumColor}" TintColor="{ThemeResource SystemAltMediumColor}" Opacity=".5" TintOpacity=".9" BackgroundSource="HostBackdrop"/>
+	</Page.Background>
+
+	<Page.Resources>
+		<ResourceDictionary Source="ms-appx:///Microsoft.UI.Xaml/DensityStyles/Compact.xaml" />
+	</Page.Resources>
 
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -23,7 +29,6 @@
 		<local:ChannelSelector Grid.Column="1" Grid.Row="0" />
 		<local:ChatControl Grid.Column="2" Grid.Row="0" />
 
-		<TextBox x:Name="tokenInput" Grid.Column="0" Grid.Row="1" KeyDown="TokenInput_KeyDown" />
-		<TextBox x:Name="messageInput" Grid.Column="4" Grid.Row="1" KeyDown="MessageInput_KeyDown" />		
+		<TextBox x:Name="messageInput" Grid.Column="4" Grid.Row="1" KeyDown="MessageInput_KeyDown" />
 	</Grid>
 </Page>

@@ -20,15 +20,15 @@ namespace Fixcord.Uwp
 			InitializeComponent();
 		}
 
-		private void TokenInput_KeyDown(object sender, KeyRoutedEventArgs e)
-		{
-			if (e.Key == VirtualKey.Enter)
-			{
-				Configuration.Token = tokenInput.Text;
-				ClientBot.client.Dispose();
-				x.Initialize();
-			}
-		}
+		//private void TokenInput_KeyDown(object sender, KeyRoutedEventArgs e)
+		//{
+		//	if (e.Key == VirtualKey.Enter)
+		//	{
+		//		Configuration.Token = .Text;
+		//		ClientBot.client.Dispose();
+		//		x.Initialize();
+		//	}
+		//}
 
 		private void MessageInput_KeyDown(object sender, KeyRoutedEventArgs e)
 		{

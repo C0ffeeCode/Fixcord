@@ -9,18 +9,18 @@
 	d:DesignHeight="300"
 	d:DesignWidth="400">
 
-	<Grid>
-		<!--<ItemsControl x:Name="messages" ItemsSource="{Binding Source=listabc, Mode=OneWay}" />-->
+    <Grid>
+        <!--<ItemsControl x:Name="messages" ItemsSource="{Binding Source=listabc, Mode=OneWay}" />-->
 
-		<ListBox x:Name="messagelisttest" x:DefaultBindMode="OneTime">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<TextBlock Text="{Binding Author}" Foreground="DarkRed" />
-						<TextBlock Text="{Binding Content}" />
-					</StackPanel>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
-	</Grid>
+        <ListView x:Name="messagelisttest" x:DefaultBindMode="OneTime" Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumHighBrush}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Author}" Foreground="DarkRed" />
+                        <TextBlock Text="{Binding Content}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </UserControl>
