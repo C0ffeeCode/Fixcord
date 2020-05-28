@@ -15,10 +15,8 @@ namespace Fixcord.Uwp.Controls
 {
 	public sealed partial class GuildSelector : UserControl
 	{
-		public GuildSelector()
-		{
-			InitializeComponent();
-		}
+		public GuildSelector() 
+			=> InitializeComponent();
 
 		private Task Refresh()
 		{
