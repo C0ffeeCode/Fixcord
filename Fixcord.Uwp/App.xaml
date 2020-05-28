@@ -1,7 +1,10 @@
-﻿<Application
+<Application
     x:Class="Fixcord.Uwp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Fixcord.Uwp">
 
+	<Application.Resources>
+		<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+	</Application.Resources>
 </Application>

@@ -10,6 +10,6 @@
 	d:DesignWidth="400">
 
 	<Grid>
-		<ListBox x:Name="ChannelList" SelectionChanged="ChannelList_SelectionChanged" SelectionMode="Single" />
+		<ListView x:Name="ChannelList" SelectionChanged="ChannelList_SelectionChanged" SelectionMode="Single" Background="{x:Null}"  />
 	</Grid>
 </UserControl>
