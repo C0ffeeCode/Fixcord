@@ -20,14 +20,9 @@
 			<ColumnDefinition Width="200" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="auto" />
-		</Grid.RowDefinitions>
 
-		<local:GuildSelector Grid.Column="0" Grid.Row="0" />
-		<local:ChannelSelector Grid.Column="1" Grid.Row="0" />
-		<local:ChatControl Grid.Column="2" Grid.Row="0" />
-		
+		<local:GuildSelector Grid.Column="0" />
+		<local:ChannelSelector Grid.Column="1" />
+		<local:ChatControl Grid.Column="2" />
 	</Grid>
 </Page>

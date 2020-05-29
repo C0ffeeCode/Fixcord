@@ -24,7 +24,11 @@ namespace Fixcord.Uwp.Controls
 		private async Task Refresh(SocketMessage m = null)
 		{
 			if (ClientBot.SelectedTextChannel == null)
-				return /*Task.CompletedTask*/;
+				return;
+			
+			if (m != null && m.Channel != ClientBot.SelectedTextChannel)
+					return;
+			
 
 			await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
 			messagelist.ItemsSource =
@@ -33,8 +37,7 @@ namespace Fixcord.Uwp.Controls
 					.AsEnumerable().OrderBy(s => s.Timestamp)
 			);
 
-			//return Task.CompletedTask;
-			messagelist.ScrollIntoView(messagelist.Items.Last());
+			//messagelist.ScrollIntoView(messagelist.Items.Last());
 		}
 
 		private void MessageInput_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -49,6 +52,5 @@ namespace Fixcord.Uwp.Controls
 				messageInput.Text = "";
 			}
 		}
-
 	}
 }

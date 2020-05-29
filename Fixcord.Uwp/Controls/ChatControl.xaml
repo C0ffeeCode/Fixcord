@@ -17,10 +17,11 @@
 
 		<ListView x:Name="messagelist" x:DefaultBindMode="OneTime"
 				  ItemContainerTransitions="{x:Null}"
+				  Transitions="{x:Null}"
 				  Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumHighBrush}">
 			<ListView.ItemsPanel>
 				<ItemsPanelTemplate>
-					<ItemsStackPanel ItemsUpdatingScrollMode="KeepItemsInView" />
+					<ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" />
 				</ItemsPanelTemplate>
 			</ListView.ItemsPanel>
 			<ListView.ItemTemplate>
@@ -32,7 +33,7 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		
+
 		<TextBox x:Name="messageInput" Grid.Column="4" Grid.Row="1" KeyDown="MessageInput_KeyDown" TextWrapping="Wrap" />
 	</Grid>
 </UserControl>
