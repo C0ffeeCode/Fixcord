@@ -1,7 +1,11 @@
 using Discord;
 using Discord.WebSocket;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 namespace Fixcord.Uwp
 {
@@ -72,6 +76,68 @@ namespace Fixcord.Uwp
 			}
 
 			client.Log += Log;
+			client.MessageReceived += SendNotification;
+		}
+
+		private Task SendNotification(SocketMessage msg)
+		{
+			//var toastVisual = $@"<visual>
+			//		<binding template='ToastGeneric'>
+			//			<text>{msg.Channel.Name}: {msg.Author.Username}</text>
+			//			<text>{msg.Content}</text>
+			//		</binding>
+			//	</visual>";
+			//var toastActions = "";
+			//var toastXmlString = $@"<toast>
+			//		{toastVisual}
+			//		{toastActions}
+			//	</toast>";
+
+			ToastVisual visual = new ToastVisual()
+			{
+				BindingGeneric = new ToastBindingGeneric()
+				{
+					Children =
+					{
+						new AdaptiveText()
+						{
+							Text = msg.Channel.Name
+						},
+
+						new AdaptiveText()
+						{
+							Text = msg.Author.Username
+						}
+					}
+				}
+			};
+
+			ToastContent toastContent = new ToastContent()
+			{
+				Visual = visual,
+
+				// Arguments when the user taps body of toast
+				//Launch = new QueryString()
+				//{
+				//	{ "action", "viewConversation" },
+				//	{ "conversationId", conversationId.ToString() }
+				//}.ToString()
+			};
+
+			// And create the toast notification
+			var toast = new ToastNotification(toastContent.GetXml());
+			toast.ExpiresOnReboot = true;
+			toast.ExpirationTime = DateTime.Now.AddSeconds(5);
+
+			//XmlDocument toastXml = new XmlDocument();
+			//toastXml.LoadXml(toastXmlString);
+			//var toast = new ToastNotification(toastXml);
+			//toast.ExpirationTime = DateTimeOffset.Parse(TimeSpan.FromSeconds(10).ToString());
+			//toast.ExpiresOnReboot = true;
+
+			ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+			return Task.CompletedTask;
 		}
 
 		private Task Log(LogMessage message)
