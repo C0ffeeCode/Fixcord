@@ -4,7 +4,6 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
 namespace Fixcord.Uwp
@@ -13,11 +12,12 @@ namespace Fixcord.Uwp
 
 	public class ClientBot
 	{
+		public static DiscordSocketClient client;
+
+		#region fields
 		public static event MyDel SelectedGuildChanged;
 		public static event MyDel SelectedTextChannelChanged;
 		public static event MyDel SelectedVoiceChannelChanged;
-
-		public static DiscordSocketClient client;
 
 		static SocketGuild selectedGuild;
 		static SocketTextChannel selectedTextChannel;
@@ -54,6 +54,7 @@ namespace Fixcord.Uwp
 			SelectedTextChannelChanged?.Invoke();
 			return Task.CompletedTask;
 		}
+		#endregion
 
 		public async void Initialize()
 		{
@@ -81,29 +82,15 @@ namespace Fixcord.Uwp
 
 		private Task SendNotification(SocketMessage msg)
 		{
-			//var toastVisual = $@"<visual>
-			//		<binding template='ToastGeneric'>
-			//			<text>{msg.Channel.Name}: {msg.Author.Username}</text>
-			//			<text>{msg.Content}</text>
-			//		</binding>
-			//	</visual>";
-			//var toastActions = "";
-			//var toastXmlString = $@"<toast>
-			//		{toastVisual}
-			//		{toastActions}
-			//	</toast>";
-
 			ToastVisual visual = new ToastVisual()
 			{
 				BindingGeneric = new ToastBindingGeneric()
 				{
-					Children =
-					{
+					Children = {
 						new AdaptiveText()
 						{
 							Text = msg.Channel.Name
 						},
-
 						new AdaptiveText()
 						{
 							Text = msg.Author.Username
@@ -114,27 +101,15 @@ namespace Fixcord.Uwp
 
 			ToastContent toastContent = new ToastContent()
 			{
-				Visual = visual,
-
-				// Arguments when the user taps body of toast
-				//Launch = new QueryString()
-				//{
-				//	{ "action", "viewConversation" },
-				//	{ "conversationId", conversationId.ToString() }
-				//}.ToString()
+				Visual = visual
 			};
 
 			// And create the toast notification
-			var toast = new ToastNotification(toastContent.GetXml());
-			toast.ExpiresOnReboot = true;
-			toast.ExpirationTime = DateTime.Now.AddSeconds(5);
-
-			//XmlDocument toastXml = new XmlDocument();
-			//toastXml.LoadXml(toastXmlString);
-			//var toast = new ToastNotification(toastXml);
-			//toast.ExpirationTime = DateTimeOffset.Parse(TimeSpan.FromSeconds(10).ToString());
-			//toast.ExpiresOnReboot = true;
-
+			var toast = new ToastNotification(toastContent.GetXml())
+			{
+				ExpiresOnReboot = true,
+				ExpirationTime = DateTime.Now.AddSeconds(5)
+			};
 			ToastNotificationManager.CreateToastNotifier().Show(toast);
 
 			return Task.CompletedTask;
