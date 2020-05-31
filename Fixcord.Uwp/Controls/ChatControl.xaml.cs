@@ -16,7 +16,7 @@ namespace Fixcord.Uwp.Controls
 	{
 		public ChatControl()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 			ClientBot.client.MessageReceived += Refresh;
 			ClientBot.SelectedTextChannelChanged += () => Refresh();
 		}
@@ -25,10 +25,10 @@ namespace Fixcord.Uwp.Controls
 		{
 			if (ClientBot.SelectedTextChannel == null)
 				return;
-			
+
 			if (m != null && m.Channel != ClientBot.SelectedTextChannel)
-					return;
-			
+				return;
+
 
 			await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
 			messagelist.ItemsSource =

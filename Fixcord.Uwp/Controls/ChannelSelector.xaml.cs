@@ -1,9 +1,7 @@
 using Discord.WebSocket;
 using Fixcord.Uwp.Pages;
 using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.WindowManagement;
@@ -19,7 +17,7 @@ namespace Fixcord.Uwp.Controls
 	{
 		public ChannelSelector()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 			ClientBot.SelectedGuildChanged += ClientBot_SelectedGuildChanged;
 		}
 
@@ -45,7 +43,7 @@ namespace Fixcord.Uwp.Controls
 				return;
 
 			if (Window.Current.CoreWindow.GetKeyState(VirtualKey.Control).
-				HasFlag(CoreVirtualKeyStates.Down) | Configuration.multiWinModeEnabled)
+				HasFlag(CoreVirtualKeyStates.Down) ^ Configuration.multiWinModeEnabled)
 				OpenInNewWindow((SocketTextChannel)ChannelList.SelectedItem);
 			else ClientBot.SelectedTextChannel = (SocketTextChannel)ChannelList.SelectedItem;
 

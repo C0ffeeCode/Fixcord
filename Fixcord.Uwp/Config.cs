@@ -6,7 +6,7 @@ namespace Fixcord.Uwp
 	public static class Configuration
 	{
 		static readonly PasswordVault vault = new PasswordVault();
-		
+
 		const string username = "token";
 		const string appname = "Fixcord";
 		const string multiWinModeState = "multiWinModeState";

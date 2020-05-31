@@ -1,10 +1,10 @@
+using Fixcord.Uwp.Pages;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Fixcord.Uwp.Pages;
 //using Microsoft.AppCenter;
 //using Microsoft.AppCenter.Analytics;
 //using Microsoft.AppCenter.Crashes;
