@@ -27,6 +27,8 @@ namespace Fixcord.Uwp.Pages
 		public SettingsPage()
 		{
 			InitializeComponent();
+			tokenInput.Password = Configuration.Token;
+			MultiWinModeEnabled.IsChecked = Configuration.multiWinModeEnabled;
 		}
 
 		private void TokenInput_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -39,11 +41,15 @@ namespace Fixcord.Uwp.Pages
 
 		private void Save()
 		{
-			if (tokenInput.Password == null) return;
+			if (tokenInput.Password != null)
+			{
+				Configuration.Token = tokenInput.Password;
 
-			Configuration.Token = tokenInput.Password;
-			ClientBot.client.Dispose();
-			new ClientBot().Initialize();
+				ClientBot.client.Dispose();
+				new ClientBot().Initialize();
+			}
+
+			Configuration.multiWinModeEnabled = (bool)MultiWinModeEnabled.IsChecked;
 		}
 	}
 }

@@ -5,6 +5,7 @@
 	xmlns:local="using:Fixcord.Uwp.Controls"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:pages="using:Fixcord.Uwp.Pages"
 	mc:Ignorable="d">
 	<Page.Background>
 		<AcrylicBrush FallbackColor="{ThemeResource SystemAltMediumColor}" TintColor="{ThemeResource SystemAltMediumColor}" Opacity=".5" TintOpacity=".9" BackgroundSource="HostBackdrop"/>
