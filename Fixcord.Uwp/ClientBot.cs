@@ -82,6 +82,9 @@ namespace Fixcord.Uwp
 
 		private Task SendNotification(SocketMessage msg)
 		{
+			if (!Configuration.NotificationsEnabled) 
+				return Task.CompletedTask;
+
 			ToastVisual visual = new ToastVisual()
 			{
 				BindingGeneric = new ToastBindingGeneric()
