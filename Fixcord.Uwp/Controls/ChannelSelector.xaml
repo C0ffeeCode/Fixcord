@@ -10,6 +10,12 @@
 	d:DesignWidth="400">
 
 	<Grid>
-		<ListView x:Name="ChannelList" SelectionChanged="ChannelList_SelectionChanged" SelectionMode="Single" Background="{x:Null}"  />
+		<ListView x:Name="ChannelList" SelectionChanged="ChannelList_SelectionChanged" SelectionMode="Single" Background="{x:Null}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
 	</Grid>
 </UserControl>

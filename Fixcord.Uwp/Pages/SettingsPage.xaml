@@ -6,12 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	Width="500"
+	Height="400">
 
     <StackPanel Margin="12">
         <TextBlock Text="Bot Token" />
         <PasswordBox x:Name="tokenInput" PlaceholderText="Insert token here" KeyDown="TokenInput_KeyDown" />
-
+		<ToggleButton x:Name="MultiWinModeEnabled" Content="Multi-Window-Mode" />
+		<ToggleButton x:Name="notificationsToggle" Content="Enable notifications" />
         <Button Content="Save" Click="Save_Click" Background="{ThemeResource SystemAccentColor}" />
     </StackPanel>
 </Page>

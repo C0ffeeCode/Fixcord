@@ -1,4 +1,5 @@
 using Discord.WebSocket;
+using Fixcord.Uwp.Pages;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using Windows.UI.WindowManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
-using Fixcord.Uwp.Pages;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -15,7 +15,7 @@ namespace Fixcord.Uwp.Controls
 {
 	public sealed partial class GuildSelector : UserControl
 	{
-		public GuildSelector() 
+		public GuildSelector()
 			=> InitializeComponent();
 
 		private Task Refresh()
