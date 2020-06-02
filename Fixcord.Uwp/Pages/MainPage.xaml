@@ -15,11 +15,11 @@
 		<ResourceDictionary Source="ms-appx:///Microsoft.UI.Xaml/DensityStyles/Compact.xaml" />
 	</Page.Resources>
 
-	<Grid>
+	<Grid x:Name="abc">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200" />
-			<ColumnDefinition Width="200" />
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" MaxWidth="250" MinWidth="100" />
+			<ColumnDefinition Width="*" MaxWidth="250" MinWidth="100" />
+			<ColumnDefinition Width="4*" />
 		</Grid.ColumnDefinitions>
 
 		<local:GuildSelector Grid.Column="0" />

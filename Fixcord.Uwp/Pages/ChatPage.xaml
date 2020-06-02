@@ -5,11 +5,21 @@
     xmlns:local="using:Fixcord.Uwp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+	xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+	mc:Ignorable="d">
 
 	<Page.Background>
 		<AcrylicBrush FallbackColor="{ThemeResource SystemAltMediumColor}" TintColor="{ThemeResource SystemAltMediumColor}" Opacity=".5" TintOpacity=".9" BackgroundSource="HostBackdrop"/>
 	</Page.Background>
+
+	<Page.Resources>
+		<muxc:CommandBarFlyout Placement="Top" x:Name="CommandBarFlyout1">
+			<!--<AppBarButton Label="Share" Icon="Share" ToolTipService.ToolTip="Share" />-->
+			<AppBarButton Label="Copy" Icon="Copy" ToolTipService.ToolTip="Copy" Click="Copy_Click" />
+			<AppBarButton Label="Delete" Icon="Delete" ToolTipService.ToolTip="Delete" Click="Delete_Click" />
+		</muxc:CommandBarFlyout>
+	</Page.Resources>
+
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -17,9 +27,11 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<ListView x:Name="messagelist" x:DefaultBindMode="OneTime"
+		<ListView x:Name="messageList" x:DefaultBindMode="OneTime"
 				  ItemContainerTransitions="{x:Null}"
-				  Transitions="{x:Null}">
+				  Transitions="{x:Null}"
+				  SelectionMode="Extended"
+				  SelectionChanged="messagelist_SelectionChanged">
 			<ListView.ItemsPanel>
 				<ItemsPanelTemplate>
 					<ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" />
