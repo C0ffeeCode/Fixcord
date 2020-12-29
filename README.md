@@ -20,3 +20,10 @@ Also it has notification support.
 
 If enabled in the settings, a new window opens for each opened channel.
 By clicking Ctrl while doing so the space in the main window can be used.
+
+# Used packages made by others
+- Microsoft.NETCore.UniversalWindowsPlatform
+- Microsoft.Toolkit.Uwp.Notifications
+- Microsoft.UI.Xaml
+- System.Text.Json
+- Discord.Net
